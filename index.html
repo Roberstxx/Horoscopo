@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Horóscopo</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h2 style="text-align: center;">Calculadora de Horóscopo</h2>
@@ -16,14 +16,26 @@
         <input type="number" id="dia" name="dia" placeholder="Día" min="1" max="31" required>
 
         <label for="mes">Mes de nacimiento:</label>
-        <input type="text" id="mes" name="mes" placeholder="Mes (Ejemplo: septiembre o 9)" required>
+        <select id="mes" name="mes" required>
+            <option value="enero">Enero</option>
+            <option value="febrero">Febrero</option>
+            <option value="marzo">Marzo</option>
+            <option value="abril">Abril</option>
+            <option value="mayo">Mayo</option>
+            <option value="junio">Junio</option>
+            <option value="julio">Julio</option>
+            <option value="agosto">Agosto</option>
+            <option value="septiembre">Septiembre</option>
+            <option value="octubre">Octubre</option>
+            <option value="noviembre">Noviembre</option>
+            <option value="diciembre">Diciembre</option>
+        </select>
 
-        <button type="submit">Calcular</button>
+        <button type="submit">Calcular</option>
     </form>
 
-    <!-- Espacio para mostrar el horóscopo -->
     <div id="resultado" class="resultado"></div>
 
-    <script src="script.js"></script> <!-- Archivo JavaScript externo -->
+    <script src="script.js"></script>
 </body>
-</html>
+</html>              
