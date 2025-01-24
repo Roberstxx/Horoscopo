@@ -2,6 +2,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     background-color: #f5f5f5;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombreado suave en todo el texto */
+}
+
+h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombreado más definido para el título */
 }
 
 form {
@@ -11,9 +16,17 @@ form {
     max-width: 400px;
     margin: 0 auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-input[type="text"], input[type="number"] {
+label {
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra suave para etiquetas */
+}
+
+input[type="text"], input[type="number"], select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -29,6 +42,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra suave para el texto del botón */
 }
 
 button:hover {
@@ -44,5 +58,7 @@ button:hover {
     border-radius: 5px;
     text-align: center;
     font-size: 18px;
-    display: none; /* Oculto por defecto */
+    display: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra suave para el texto del resultado */
 }
+
