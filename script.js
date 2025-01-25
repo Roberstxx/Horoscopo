@@ -128,7 +128,7 @@ function determinarHoroscopo(dia, mes) {
 
 // Función para mostrar resultados exitosos
 function mostrarResultado(mensaje) {
-    resultado.style.display = "block";
+    resultado.style.display = "block"; // Hacer visible la caja del resultado
     resultado.style.background = "#e9f7ef";
     resultado.style.borderColor = "#d4edda";
     resultado.style.color = "#155724";
@@ -137,7 +137,7 @@ function mostrarResultado(mensaje) {
 
 // Función para mostrar mensajes de error
 function mostrarError(mensaje) {
-    resultado.style.display = "block";
+    resultado.style.display = "block"; // Hacer visible la caja del resultado
     resultado.style.background = "#f8d7da";
     resultado.style.borderColor = "#f5c6cb";
     resultado.style.color = "#721c24";
