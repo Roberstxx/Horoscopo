@@ -1,12 +1,15 @@
+// Obtener referencias a los elementos del formulario y resultado
 const form = document.getElementById('horoscopeForm');
 const resultado = document.getElementById('resultado');
 
+// Diccionario para convertir nombres de meses en números
 const meses = {
     "enero": 1, "febrero": 2, "marzo": 3, "abril": 4,
     "mayo": 5, "junio": 6, "julio": 7, "agosto": 8,
     "septiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12
 };
 
+// Lista de signos del zodiaco con sus rangos de fechas
 const signos = [
     { nombre: "Capricornio", inicio: { mes: 1, dia: 1 }, fin: { mes: 1, dia: 19 } },
     { nombre: "Acuario", inicio: { mes: 1, dia: 20 }, fin: { mes: 2, dia: 18 } },
@@ -23,37 +26,73 @@ const signos = [
     { nombre: "Capricornio", inicio: { mes: 12, dia: 22 }, fin: { mes: 12, dia: 31 } }
 ];
 
+// Manejar el evento "submit" del formulario
 form.addEventListener('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevenir recarga de la página
 
-    const nombre = document.getElementById('nombre').value.trim();
-    const dia = parseInt(document.getElementById('dia').value.trim());
-    let mes = document.getElementById('mes').value.trim().toLowerCase();
+    try {
+        // Capturar y limpiar los valores ingresados
+        const nombre = document.getElementById('nombre').value.trim();
+        const dia = parseInt(document.getElementById('dia').value.trim());
+        let mes = document.getElementById('mes').value.trim().toLowerCase();
 
-    if (isNaN(mes)) {
-        mes = meses[mes];
-        if (!mes) {
-            mostrarError("Mes inválido.");
-            return;
+        // Validar nombre (no debe estar vacío)
+        if (!nombre) {
+            throw new Error("Por favor, ingresa tu nombre.");
         }
-    } else {
-        mes = parseInt(mes);
-    }
 
-    if (!nombre || !dia || !mes || dia < 1 || dia > 31 || mes < 1 || mes > 12) {
-        mostrarError("Datos inválidos.");
-        return;
-    }
+        // Convertir el mes de texto a número si es necesario
+        if (isNaN(mes)) {
+            mes = meses[mes];
+            if (!mes) {
+                throw new Error("Por favor, selecciona un mes válido.");
+            }
+        } else {
+            mes = parseInt(mes);
+        }
 
-    const horoscopo = determinarHoroscopo(dia, mes);
-    mostrarResultado(`Hola, <strong>${nombre}</strong>. Naciste el <strong>${dia}/${mes}</strong> y tu horóscopo es <strong>${horoscopo}</strong>.`);
+        // Validar día y mes
+        if (isNaN(dia) || isNaN(mes) || !esFechaValida(dia, mes)) {
+            throw new Error("Por favor, ingresa un día y mes válidos.");
+        }
+
+        // Determinar el horóscopo
+        const horoscopo = determinarHoroscopo(dia, mes);
+        if (horoscopo === "Desconocido") {
+            throw new Error("No se pudo determinar tu signo zodiacal. Verifica la fecha.");
+        }
+
+        // Mostrar el resultado
+        mostrarResultado(`Hola, <strong>${nombre}</strong>. Naciste el <strong>${dia}/${mes}</strong> y tu horóscopo es <strong>${horoscopo}</strong>.`);
+    } catch (error) {
+        // Mostrar mensaje de error si ocurre algún problema
+        mostrarError(error.message);
+    }
 });
 
+// Función para determinar si una fecha es válida
+function esFechaValida(dia, mes) {
+    const diasMaximos = {
+        1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
+        7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31
+    };
+
+    // Comprobar si febrero tiene 29 días (año bisiesto)
+    if (mes === 2 && dia === 29) {
+        return true; // En este caso, no consideramos el año exacto
+    }
+
+    // Verificar si el día es válido según el mes
+    return dia >= 1 && dia <= diasMaximos[mes];
+}
+
+// Función para determinar el signo zodiacal
 function determinarHoroscopo(dia, mes) {
     for (const signo of signos) {
         const inicio = signo.inicio;
         const fin = signo.fin;
 
+        // Comprobar si la fecha está dentro del rango del signo actual
         if (
             (mes === inicio.mes && dia >= inicio.dia) || 
             (mes === fin.mes && dia <= fin.dia)
@@ -64,6 +103,7 @@ function determinarHoroscopo(dia, mes) {
     return "Desconocido";
 }
 
+// Función para mostrar resultados exitosos
 function mostrarResultado(mensaje) {
     resultado.style.display = "block";
     resultado.style.background = "#e9f7ef";
@@ -72,6 +112,7 @@ function mostrarResultado(mensaje) {
     resultado.innerHTML = mensaje;
 }
 
+// Función para mostrar mensajes de error
 function mostrarError(mensaje) {
     resultado.style.display = "block";
     resultado.style.background = "#f8d7da";
