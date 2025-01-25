@@ -1,6 +1,8 @@
 // Obtener referencias a los elementos del formulario y resultado
 const form = document.getElementById('horoscopeForm');
 const resultado = document.getElementById('resultado');
+const diaInput = document.getElementById('dia');
+const mesInput = document.getElementById('mes');
 
 // Diccionario para convertir nombres de meses en números
 const meses = {
@@ -33,8 +35,8 @@ form.addEventListener('submit', function(event) {
     try {
         // Capturar y limpiar los valores ingresados
         const nombre = document.getElementById('nombre').value.trim();
-        const dia = parseInt(document.getElementById('dia').value.trim());
-        let mes = document.getElementById('mes').value.trim().toLowerCase();
+        const dia = parseInt(diaInput.value.trim());
+        let mes = mesInput.value.trim().toLowerCase();
 
         // Validar nombre (no debe estar vacío)
         if (!nombre) {
@@ -67,6 +69,27 @@ form.addEventListener('submit', function(event) {
     } catch (error) {
         // Mostrar mensaje de error si ocurre algún problema
         mostrarError(error.message);
+    }
+});
+
+// Manejar el evento "change" del campo de mes para ajustar los días permitidos
+mesInput.addEventListener('change', function() {
+    const mes = this.value.trim().toLowerCase();
+
+    // Obtener el máximo de días para el mes seleccionado
+    const diasMaximos = {
+        enero: 31, febrero: 29, marzo: 31, abril: 30, mayo: 31,
+        junio: 30, julio: 31, agosto: 31, septiembre: 30,
+        octubre: 31, noviembre: 30, diciembre: 31
+    };
+
+    const maxDias = diasMaximos[mes] || 31;
+
+    // Ajustar el valor y el atributo "max" del campo de día
+    diaInput.max = maxDias;
+
+    if (parseInt(diaInput.value) > maxDias) {
+        diaInput.value = maxDias; // Ajustar el valor si supera el máximo
     }
 });
 
@@ -120,3 +143,4 @@ function mostrarError(mensaje) {
     resultado.style.color = "#721c24";
     resultado.innerHTML = `<strong>Error:</strong> ${mensaje}`;
 }
+
