@@ -1,42 +1,45 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Horóscopo</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulario Registro</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Conexión con los estilos -->
 </head>
 <body>
-    <h2 style="text-align: center;">Calculadora de Horóscopo</h2>
-    <form id="horoscopeForm">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
+    <section class="form-register">
+        <h4>Formulario Registro</h4>
+        <form id="horoscopeForm" action="#">
+            <label for="nombre">Nombre:</label>
+            <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" required>
 
-        <label for="dia">Día de nacimiento:</label>
-        <input type="number" id="dia" name="dia" placeholder="Día" min="1" max="31" required>
+            <label for="dia">Día:</label>
+            <input class="controls" type="number" name="dia" id="dia" min="1" max="31" placeholder="Ingrese su día de nacimiento" required>
 
-        <label for="mes">Mes de nacimiento:</label>
-        <select id="mes" name="mes" required>
-            <option value="enero">Enero</option>
-            <option value="febrero">Febrero</option>
-            <option value="marzo">Marzo</option>
-            <option value="abril">Abril</option>
-            <option value="mayo">Mayo</option>
-            <option value="junio">Junio</option>
-            <option value="julio">Julio</option>
-            <option value="agosto">Agosto</option>
-            <option value="septiembre">Septiembre</option>
-            <option value="octubre">Octubre</option>
-            <option value="noviembre">Noviembre</option>
-            <option value="diciembre">Diciembre</option>
-        </select>
+            <label for="mes">Mes:</label>
+            <select class="controls" name="mes" id="mes" required>
+                <option value="">Seleccione un mes</option>
+                <option value="enero">Enero</option>
+                <option value="febrero">Febrero</option>
+                <option value="marzo">Marzo</option>
+                <option value="abril">Abril</option>
+                <option value="mayo">Mayo</option>
+                <option value="junio">Junio</option>
+                <option value="julio">Julio</option>
+                <option value="agosto">Agosto</option>
+                <option value="septiembre">Septiembre</option>
+                <option value="octubre">Octubre</option>
+                <option value="noviembre">Noviembre</option>
+                <option value="diciembre">Diciembre</option>
+            </select>
 
-        <button type="submit">Tu signo Zodiacal</option>
-    </form>
+            <button class="botons" type="submit">Tu signo Zodiacal</button>
+        </form>
+        <div id="resultado" class="resultado"></div>
+    </section>
 
-    <div id="resultado" class="resultado"></div>
-
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Conexión con el JavaScript -->
 </body>
-</html>              
-        
+</html>
+
