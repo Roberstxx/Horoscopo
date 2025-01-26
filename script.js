@@ -143,4 +143,3 @@ function mostrarError(mensaje) {
     resultado.style.color = "#721c24";
     resultado.innerHTML = `<strong>Error:</strong> ${mensaje}`;
 }
-
