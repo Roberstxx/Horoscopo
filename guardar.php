@@ -52,6 +52,8 @@ try {
     $sql = "INSERT INTO consultas (nombre, dia, mes, signo, fecha_consulta) VALUES ('$nombre', '$dia', '$mesNumero', '$signo', '$fechaConsulta')";
 
     if ($conn->query($sql) === TRUE) {
+        // No recargar la página
+        header("Location: index.php");
         echo "Consulta guardada exitosamente.";
     } else {
         throw new Exception("Error: " . $sql . "<br>" . $conn->error);
