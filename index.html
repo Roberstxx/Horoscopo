@@ -10,7 +10,8 @@
 <body>
     <section class="form-register">
         <h4>Formulario Registro</h4>
-        <form id="horoscopeForm" action="#">
+        <form id="horoscopeForm" action="guardar_consulta.php" method="POST">
+
             <label for="nombre">Nombre:</label>
             <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" required>
 
@@ -39,6 +40,7 @@
         <div id="resultado" class="resultado" style="display: none;"></div>
 
     </section>
+    <input type="hidden" id="signo" name="signo">
 
     <script src="script.js"></script> <!-- Conexión con el JavaScript -->
     <section>
@@ -51,5 +53,4 @@
         <span></span>
         <span></span>
 </body>
-</html>
-
+</html>  
