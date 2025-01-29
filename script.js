@@ -67,8 +67,17 @@ form.addEventListener('submit', function(event) {
         // Mostrar el resultado
         mostrarResultado(`Hola, <strong>${nombre}</strong>. Naciste el <strong>${dia}/${mes}</strong> y tu horóscopo es <strong>${horoscopo}</strong>.`);
 
-        // Enviar el formulario
-        form.submit();
+        // Enviar datos al servidor usando AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "guardar.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText); // Respuesta del servidor
+            }
+        };
+        xhr.send(`nombre=${nombre}&dia=${dia}&mes=${mes}&signo=${horoscopo}`);
+
     } catch (error) {
         // Mostrar mensaje de error si ocurre algún problema
         mostrarError(error.message);
@@ -146,4 +155,26 @@ function mostrarError(mensaje) {
     resultado.style.color = "#721c24";
     resultado.innerHTML = `<strong>Error:</strong> ${mensaje}`;
 }
+document.getElementById("horoscopeForm").addEventListener("submit", function (event) {
+    event.preventDefault()
+    const dia = parseInt(document.getElementById("dia").value);
+    const mes = document.getElementById("mes").value;
 
+    function calcularSigno(dia, mes) {
+        const signos = ["Capricornio", "Acuario", "Piscis", "Aries", "Tauro", "Géminis",
+            "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario"];
+        const fechas = [19, 18, 20, 19, 20, 20, 22, 22, 22, 22, 21, 21];
+        const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+            "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+
+        const mesIndex = meses.indexOf(mes);
+        if (dia > fechas[mesIndex]) {
+            return signos[(mesIndex + 1) % 12];
+        } else {
+            return signos[mesIndex];
+        }
+    }
+
+    const signo = calcularSigno(dia, mes);
+    document.getElementById("signo").value = signo;
+});
